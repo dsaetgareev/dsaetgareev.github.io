@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="alert">
-      <h3>{{ x }} + {{ y }} = ?</h3>
+      <h3 v-if="minus">{{ x }} - {{ y }} = ?</h3>
+      <h3 v-else>{{ x }} + {{ y }} = ?</h3>
       <div class="buttons">
         <button class="btn btn-success"
                 v-for="number in answers"
@@ -25,14 +26,20 @@
       }
     },
     computed: {
+      checkPositive () {
+        return this.x > this.y;
+      },
+      minus() {
+        return Math.random() > 0.5 && this.checkPositive;
+      },
       good() {
-        return this.x + this.y;
+        return this.minus ? this.x - this.y : this.x + this.y;
       },
       answers() {
         let res = [this.good];
         while (res.length < this.settings.variants) {
           let num = mtRand(this.good - this.settings.range, this.good + this.settings.range);
-          if (res.indexOf(num) === -1) {
+          if (res.indexOf(num) === -1 && num > 0) {
             res.push(num);
           }
         }
