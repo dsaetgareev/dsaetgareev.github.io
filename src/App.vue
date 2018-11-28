@@ -1,6 +1,6 @@
 <template>
   <div id="training">
-    <h3>Арифмитический тренажер для Камиллы!</h3>
+    <h3>Арифметический тренажер для Камиллы!</h3>
     <hr>
     <div class="progress">
       <div class="progress-bar" :style="progrssStyles"></div>
